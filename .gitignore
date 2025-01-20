@@ -1,0 +1,11 @@
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
+node_modules/
+.vscode/
+*.log
+
+# Ignorer les fichiers de configuration
+*.xml
+*.ini
+*.pub

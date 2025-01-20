@@ -1,0 +1,20 @@
+{
+    "name": "fanta-coaching",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "vite",
+        "build": "vite build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "description": "",
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.7.2",
+        "googleapis": "^144.0.0",
+        "normalize.css": "^8.0.1",
+        "vite": "^6.0.9"
+    }
+}

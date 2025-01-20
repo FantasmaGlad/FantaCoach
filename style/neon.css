@@ -1,0 +1,60 @@
+@import "normalize.css";
+/* Effets néon pour les sections et les cartes */
+section {
+    background-color: #1f1f1f;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1), 0 0 30px rgba(115, 0, 255, 0.3);
+  }
+  
+  /* Titre avec effet lumineux */
+  h1, h2 {
+    text-shadow: 0 0 5px #ff007f, 0 0 10px #7300ff, 0 0 20px #ff007f;
+  }
+  
+  /* Halo autour des cartes */
+  .next-session {
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.5), 0 0 40px rgba(0, 0, 255, 0.8);
+  }
+  
+  /* Effet lumineux pour les boutons */
+  .btn-connect,
+  .btn-create,
+  .btn-details {
+    box-shadow: 0 0 15px #ff007f, 0 0 30px #7300ff, 0 0 45px #ff007f;
+  }
+  
+  .btn-connect:hover,
+  .btn-create:hover,
+  .btn-details:hover {
+    box-shadow: 0 0 20px #ff007f, 0 0 50px #7300ff, 0 0 70px #ff007f;
+  }
+  
+  /* Plans lumineux pour l'arrière-plan */
+  body::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 0, 127, 0.3);
+    filter: blur(200px);
+    z-index: 0;
+  }
+  
+  body::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: rgba(115, 0, 255, 0.3);
+    filter: blur(200px);
+    z-index: 0;
+  }
+  

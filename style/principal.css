@@ -1,0 +1,78 @@
+@import "normalize.css";
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  header {
+    padding: 20px;
+    text-align: center;
+    background-color: #1f1f1f;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  header h1 {
+    font-size: 2em;
+    color: #ffffff;
+  }
+  
+  main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  section {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  section h2 {
+    color: #ffffff;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1f1f1f;
+    color: #ffffff;
+  }
+  
+  /* Boutons */
+  .btn-connect,
+  .btn-create,
+  .btn-details {
+    background: linear-gradient(90deg, #ff007f, #7300ff);
+    border: none;
+    color: white;
+    font-size: 1em;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff007f, 0 0 20px #7300ff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .btn-connect:hover,
+  .btn-create:hover,
+  .btn-details:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff007f, 0 0 40px #7300ff;
+  }
+  
+  /* Texte */
+  p {
+    line-height: 1.5;
+  }
+  
