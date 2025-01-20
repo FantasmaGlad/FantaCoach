@@ -1,64 +1,69 @@
-// Charger les utilisateurs depuis localStorage
-function loadUsers() {
-    const users = JSON.parse(localStorage.getItem("users")) || {};
-    return users;
+// Import des modules Firebase et OAuth2
+import { addSession, getSessions, addUser, getUser } from "./database.js";
+import { startGoogleAuth, extractAccessTokenFromUrl, getUserInfo } from "./oauth.js";
+
+// Initialiser la logique principale après chargement de la page
+document.addEventListener("DOMContentLoaded", () => {
+  const loginButton = document.getElementById("login-button"); // Bouton de connexion
+  const addSessionButton = document.getElementById("add-session-button"); // Bouton pour ajouter une session
+  const sessionList = document.getElementById("session-list"); // Liste des sessions
+
+  // Déclenche l'authentification Google
+  if (loginButton) {
+    loginButton.addEventListener("click", () => {
+      startGoogleAuth();
+    });
   }
-  
-  // Afficher les utilisateurs connectés dans l'espace administrateur
-  function displayUsers() {
-    const userListElement = document.getElementById("user-list");
-    if (!userListElement) return;
-  
-    const users = loadUsers();
-    const userListHTML = Object.keys(users)
-      .map(email => `<li>${email}</li>`)
-      .join("");
-    userListElement.innerHTML = userListHTML;
-  }
-  
-  // Ajouter une séance à un utilisateur spécifique
-  function addSessionToUser(email, session) {
-    const users = loadUsers();
-    if (users[email]) {
-      if (!users[email].sessions) {
-        users[email].sessions = [];
+
+  // Vérifier si un jeton d'accès est présent dans l'URL
+  const token = extractAccessTokenFromUrl();
+  if (token) {
+    // Récupérer les informations utilisateur
+    getUserInfo(token, (userInfo) => {
+      console.log("Utilisateur connecté :", userInfo);
+
+      // Ajouter l'utilisateur à Firebase
+      addUser(userInfo.id, {
+        name: userInfo.name,
+        email: userInfo.email,
+        picture: userInfo.picture,
+      });
+
+      // Afficher le nom de l'utilisateur connecté
+      const welcomeMessage = document.getElementById("welcome-message");
+      if (welcomeMessage) {
+        welcomeMessage.textContent = `Bienvenue, ${userInfo.name}`;
       }
-      users[email].sessions.push(session);
-      localStorage.setItem("users", JSON.stringify(users));
-      alert(`Séance ajoutée pour ${email}`);
-    } else {
-      alert("Utilisateur non trouvé.");
-    }
+
+      // Charger les sessions de l'utilisateur
+      loadUserSessions(userInfo.id);
+    });
   }
-  
-  // Gestionnaire de formulaire pour créer une séance
-  function handleSessionFormSubmit(event) {
-    event.preventDefault();
-    const sessionName = document.getElementById("session-name").value;
-    const sessionDate = document.getElementById("session-date").value;
-  
-    if (!sessionName || !sessionDate) {
-      alert("Veuillez remplir tous les champs.");
-      return;
-    }
-  
-    const session = {
-      name: sessionName,
-      date: sessionDate,
-    };
-  
-    const email = prompt("Entrez l'email de l'utilisateur pour ajouter cette séance :");
-    if (email) {
-      addSessionToUser(email, session);
-    }
+
+  // Ajouter une nouvelle session
+  if (addSessionButton) {
+    addSessionButton.addEventListener("click", () => {
+      const userId = "user123"; // Remplacez par l'ID utilisateur récupéré dynamiquement
+      const session = {
+        date: document.getElementById("session-date").value,
+        type: document.getElementById("session-type").value,
+      };
+
+      addSession(userId, session);
+    });
   }
-  
-  // Initialisation
-  document.addEventListener("DOMContentLoaded", () => {
-    displayUsers();
-  
-    const sessionForm = document.getElementById("create-session-form");
-    if (sessionForm) {
-      sessionForm.addEventListener("submit", handleSessionFormSubmit);
-    }
-  });  
+
+  // Charger les sessions utilisateur
+  function loadUserSessions(userId) {
+    getSessions(userId, (sessions) => {
+      sessionList.innerHTML = ""; // Réinitialiser la liste
+
+      for (const sessionId in sessions) {
+        const session = sessions[sessionId];
+        const listItem = document.createElement("li");
+        listItem.textContent = `${session.date} - ${session.type}`;
+        sessionList.appendChild(listItem);
+      }
+    });
+  }
+});
