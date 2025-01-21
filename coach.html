@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tableau de bord - Coach</title>
-  <link rel="stylesheet" href="./style/principal.css">
-  <link rel="stylesheet" href="./style/neon.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Coach - Fanta Coaching</title>
+    <link rel="stylesheet" href="style/principal.css">
+    <link rel="stylesheet" href="style/neon.css">
 </head>
 <body>
-  <header>
-    <h1>Tableau de Bord Coach</h1>
-    <p id="welcome-message">Bienvenue, Coach</p>
-  </header>
+    <header>
+        <h1>Espace Coach</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Créer une séance</h2>
+            <form id="create-session-form">
+                <label for="session-name">Nom de la séance :</label>
+                <input type="text" id="session-name" name="session-name" required>
 
-  <main>
-    <section>
-      <h2>Créer une nouvelle séance</h2>
-      <form id="session-form">
-        <label for="session-date">Date :</label>
-        <input type="date" id="session-date" required>
+                <label for="session-date">Date :</label>
+                <input type="date" id="session-date" name="session-date" required>
 
-        <label for="session-type">Type de séance :</label>
-        <input type="text" id="session-type" placeholder="Ex: Cardio, Renforcement" required>
+                <button type="submit" class="btn-create">Créer</button>
+            </form>
+        </section>
+        <section>
+            <h2>Utilisateurs connectés</h2>
+            <ul id="connected-users-list">
+                <!-- Liste des utilisateurs connectés sera ajoutée dynamiquement ici -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Fanta Coaching - Tous droits réservés.</p>
+    </footer>
 
-        <button type="button" id="add-session-button" class="btn-create">Ajouter la séance</button>
-      </form>
-    </section>
+    <script src="scripts/database.js" type="module"></script>
+    <script src="scripts/oauth.js" type="module"></script>
+    <script>
+        import { postSession } from './scripts/database.js';
 
-    <section>
-      <h2>Liste des utilisateurs</h2>
-      <ul id="user-list">
-        <!-- La liste des utilisateurs sera générée dynamiquement -->
-      </ul>
-    </section>
-  </main>
+        document.getElementById('create-session-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const sessionName = document.getElementById('session-name').value;
+            const sessionDate = document.getElementById('session-date').value;
 
-  <footer>
-    <p>&copy; 2025 Fanta Coaching - Espace Coach</p>
-  </footer>
-
-  <script type="module" src="./scripts/oauth.js"></script>
-  <script type="module" src="./scripts/principal.js"></script>
+            postSession(sessionName, sessionDate);
+        });
+    </script>
 </body>
 </html>

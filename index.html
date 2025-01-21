@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fanta Coaching</title>
-  <link rel="stylesheet" href="./style/principal.css">
-  <link rel="stylesheet" href="./style/neon.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fanta Coaching</title>
+    <link rel="stylesheet" href="style/principal.css">
+    <link rel="stylesheet" href="style/neon.css">
 </head>
 <body>
-  <header>
-    <h1>Bienvenue sur Fanta Coaching</h1>
-  </header>
+    <header>
+        <h1>Fanta Coaching</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Bienvenue sur Fanta Coaching</h2>
+            <p>Planifiez vos séances et accédez à votre espace personnalisé.</p>
+            <button id="login-button" class="btn-connect">Me connecter</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Fanta Coaching - Tous droits réservés.</p>
+    </footer>
 
-  <main>
-    <section>
-      <h2>Connectez-vous pour commencer</h2>
-      <button id="login-button" class="btn-connect">Me connecter</button>
-    </section>
-  </main>
+    <script src="scripts/oauth.js" type="module"></script>
+    <script>
+        import { startGoogleAuth } from './scripts/oauth.js';
 
-  <footer>
-    <p>&copy; 2025 Fanta Coaching</p>
-  </footer>
-
-  <script type="module" src="./scripts/oauth.js"></script>
-  <script type="module" src="./scripts/principal.js"></script>
+        document.getElementById('login-button').addEventListener('click', () => {
+            startGoogleAuth();
+        });
+    </script>
 </body>
 </html>
