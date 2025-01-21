@@ -1,6 +1,7 @@
 // Configuration OAuth2
-const CLIENT_ID = "VOTRE_CLIENT_ID"; // Remplacez par votre client ID OAuth2
-const REDIRECT_URI = "https://fanta-coaching.netlify.app/utilisateur.html"; // URL de redirection utilisateur par défaut
+const CLIENT_ID = "1005485884986-1qsda51gbqj9rt9qda5vpcol5f3rq12m.apps.googleusercontent.com";
+const CLIENT_SECRET = "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"; // Ajout du secret client
+const REDIRECT_URI = "https://fanta-coaching.netlify.app/utilisateur.html";
 const AUTH_URI = "https://accounts.google.com/o/oauth2/auth";
 const TOKEN_URI = "https://oauth2.googleapis.com/token";
 
