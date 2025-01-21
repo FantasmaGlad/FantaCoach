@@ -57,30 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // Vous pouvez sauvegarder les informations utilisateur dans Firebase ici
     });
   }
+
+  // Ajouter l'événement au bouton "Me connecter"
+  const loginButton = document.getElementById("login-button");
+  if (loginButton) {
+    loginButton.addEventListener("click", startGoogleAuth);
+  } else {
+    console.error("Le bouton 'Me connecter' est introuvable dans le DOM.");
+  }
 });
-
-// Fonction pour poster une séance dans Firebase
-export function postSession(sessionName, sessionDate) {
-  const databaseUrl = "https://fanta-coaching-default-rtdb.europe-west1.firebasedatabase.app";
-  const sessionData = {
-    name: sessionName,
-    date: sessionDate,
-    created_at: new Date().toISOString(),
-  };
-
-  fetch(`${databaseUrl}/sessions.json`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(sessionData),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Séance postée avec succès :", data);
-      alert("Séance créée avec succès !");
-    })
-    .catch((err) => {
-      console.error("Erreur lors de la création de la séance :", err);
-    });
-}
